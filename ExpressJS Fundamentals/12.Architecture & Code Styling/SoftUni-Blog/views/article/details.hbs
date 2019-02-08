@@ -1,0 +1,42 @@
+<div class="container body-content">
+  {{#if notFound}}
+  <div class="alert alert-warning">
+    <h2>This article does not exist</h2>
+  </div>
+  {{/if}}
+
+  {{#unless notFound}}
+    <div class="row">
+        <div class="col-md-12">
+            <article>
+                <header>
+                    <h2>{{article.title}}</h2>
+                </header>
+
+                <p>
+                    {{article.desciption}}
+                </p>
+
+                <small class="author">
+                    {{article.authorId.fullName}}
+                </small>
+
+                <small>
+                    {{article.creationDate}}
+                </small>
+
+                <footer>
+                    <div class="pull-right">
+                        <!-- Only for admins or author-->
+                        {{#if canChange}}
+                        <a class="btn btn-success btn-xs" href="/article/edit/{{article._id}}">Edit &raquo;</a>
+                        <a class="btn btn-danger btn-xs" href="/article/delete/{{article._id}}">Delete &raquo;</a>
+                        {{/if}}
+                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </div>
+    {{/unless}}
+</div>

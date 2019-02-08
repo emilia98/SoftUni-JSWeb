@@ -1,0 +1,60 @@
+<div class="container body-content span=8 offset=2">
+  {{#if notFound}}
+  <div class="alert alert-warning">
+    <h2>This article does not exist</h2>
+  </div>
+  {{/if}}
+
+  {{#unless notFound}}
+    <div class="well">
+      {{#if hasSuccess}}
+      <div class="alert alert-success">
+        Successfully deleted the article!
+      </div>
+      <script>
+         $(() => {
+           let t = setTimeout(function () {
+             window.location.href = '/'
+             clearT();
+           }, 1500);
+
+           function clearT() {
+             clearTimeout(t);
+           }
+
+           t();
+       })();
+      </script>
+      {{/if}}
+
+        <form class="form-horizontal" action="/article/delete/{{article._id}}" method="POST">
+            <fieldset>
+                <legend>Delete Article</legend>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="articleTitle">Article Title</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="articleTitle" placeholder="Article Title" value="{{article.title}}"
+                            name="title" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="articleContent">Content</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="articleContent" rows="5" name="content" disabled >{{article.description}}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+
+                        <a href="/" class="btn btn-default">Cancel</a>
+
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {{/unless}}
+</div>

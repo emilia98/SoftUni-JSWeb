@@ -1,0 +1,58 @@
+
+
+<div class="container body-content span=8 offset=2">
+    <div class="well">
+      {{#each errors}}
+      <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>{{this.field}}</strong> {{this.msg}}
+      </div>
+      {{/each}}
+      {{#if hasSuccess}}
+      <div class="alert alert-success">
+        Successfully created a new article!
+      </div>
+      <script>
+         $(() => {
+           let t = setTimeout(function () {
+             window.location.href = '/'
+             clearT();
+           }, 1500);
+
+           function clearT() {
+             clearTimeout(t);
+           }
+
+           t();
+       })();
+      </script>
+      {{/if}}
+        <form class="form-horizontal" action="/article/create" method="POST" id="create-from">
+            <fieldset>
+                <legend>New Article</legend>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="articleTitle">Article Title</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" value="{{title}}" id="articleTitle" placeholder="Article Title" name="title" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="articleContent">Content</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="articleContent" rows="5" name="content" required>{{content}}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+
+                        <button type="reset" class="btn btn-default">Cancel</button>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
